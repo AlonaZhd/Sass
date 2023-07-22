@@ -1,0 +1,19 @@
+$colorMap: ( 
+    secondary: #f0f0f0,
+    light: #d4d4d4,
+);
+
+@function color ($key) {
+    @return map-get($colorMap, $key);
+}
+
+$sizeMap: (
+    textSubtitle: 28px,
+    textSubtitleSmall: 20px,
+    text: 14px,
+    textSmall: 12px,
+);
+
+@function size ($key: 'default') {
+    @return map-get($sizeMap, $key);
+}
