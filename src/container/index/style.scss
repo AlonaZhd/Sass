@@ -8,7 +8,7 @@
     max-width: 600px;
 
     &__title {
-        font-size: s.size('textSubtitleSmall');
+        font-size: s.size('textTitle');
         font-weight: bold;
         padding-bottom: s.space(1);
         border-bottom: 1px solid s.color('light');

@@ -1,0 +1,18 @@
+<main class='main'>
+  <section class='product-list'>
+    <h1 class='title'>Список товарів</h1>
+    {{#with data.products}}
+
+      {{#if isEmpty}}
+        <mark>Товари не додані</mark>
+      {{else}}
+        <div class='product-cards'>
+          {{#each list}}
+            {{> product-card}}
+          {{/each}}
+        </div>
+      {{/if}}
+
+    {{/with}}
+  </section>
+</main>
