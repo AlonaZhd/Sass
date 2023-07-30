@@ -5,250 +5,153 @@ const router = express.Router()
 
 // ================================================================
 
+class Product {
+  static #list = []
+
+  static #count = 0
+
+  constructor(img, title, description, category, price) {
+    this.id = ++Product.#count // Генеруємо унікальний id для товару
+    this.img = img
+    this.title = title
+    this.description = description
+    this.category = category
+    this.price = price
+  }
+
+  static add = (
+    img,
+    title,
+    description,
+    category,
+    price,
+  ) => {
+    const newProduct = new Product(
+      img,
+      title,
+      description,
+      category,
+      price,
+    )
+
+    this.#list.push(newProduct)
+  }
+
+  static getList = () => {
+    return this.#list
+  }
+
+  static getById = (id) => {
+    console.log('Searching for product with id:', id)
+    return this.#list.find((product) => product.id === id)
+  }
+
+  static getRandomList = (id) => {
+    // Фільтруємо товари, щоб вилучити той, з яким порівнюємо id
+    const filteredList = this.#list.filter(
+      (product) => product.id !== id,
+    )
+
+    // Відсортовуємо за допомогою Math.random() та перемашаємо масив
+    const shuffledList = filteredList.sort(
+      () => Math.random() - 0.5,
+    )
+
+    // Повертаємо перші 3 елементи з перемішаного масиву
+    return shuffledList.slice(0, 3)
+  }
+}
+
+Product.add(
+  '../img/purchare/image-616.jpg',
+  `Комп'ютер Artline Gaming (X43v31) AMD Ryzen 5 3600/`,
+  `AMD Ryzen 5 3600 (3.6 - 4.2 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 480 ГБ / nVidia GeForce RTX 3050, 8 ГБ / без ОД / LAN / без ОС`,
+  [
+    { id: 1, text: 'Готовий до відправки' },
+    { id: 2, text: 'Топ продажів' },
+  ],
+  27000,
+)
+
+Product.add(
+  '/../img/purchare/image-617.jpg',
+  `Комп'ютер COBRA Advanced (I11F.8.H1S2.15T.13356) Intel`,
+  `Intel Core i3-10100F (3.6 - 4.3 ГГц) / RAM 8 ГБ / HDD 1 ТБ + SSD 240 ГБ / GeForce GTX 1050 Ti, 4 ГБ / без ОД / LAN / Linux`,
+  [
+    { id: 1, text: 'Готовий до відправки' },
+    { id: 2, text: 'Топ продажів' },
+  ],
+  27000,
+)
+
+Product.add(
+  '/../img/purchare/image-618.jpg',
+  `Комп'ютер ARTLINE Gaming by ASUS TUF v119 (TUFv119)`,
+  `Intel Core i9-13900KF (3.0 - 5.8 ГГц) / RAM 64 ГБ / SSD 2 ТБ (2 x 1 ТБ) / nVidia GeForce RTX 4070 Ti, 12 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / без ОС`,
+  [
+    { id: 1, text: 'Готовий до відправки' },
+    { id: 2, text: 'Топ продажів' },
+  ],
+  27000,
+)
+
+Product.add(
+  '/../img/purchare/image-616.jpg',
+  `Комп'ютер Artline Gaming (X43v31) AMD Ryzen 5 3600/`,
+  `AMD Ryzen 5 3600 (3.6 - 4.2 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 480 ГБ / nVidia GeForce RTX 3050, 8 ГБ / без ОД / LAN / без ОС`,
+  [
+    { id: 1, text: 'Готовий до відправки' },
+    { id: 2, text: 'Топ продажів' },
+  ],
+  27000,
+)
+
+Product.add(
+  '/../img/purchare/image-617.jpg',
+  `Комп'ютер COBRA Advanced (I11F.8.H1S2.15T.13356) Intel`,
+  `Intel Core i3-10100F (3.6 - 4.3 ГГц) / RAM 8 ГБ / HDD 1 ТБ + SSD 240 ГБ / GeForce GTX 1050 Ti, 4 ГБ / без ОД / LAN / Linux`,
+  [
+    { id: 1, text: 'Готовий до відправки' },
+    { id: 2, text: 'Топ продажів' },
+  ],
+  27000,
+)
+
+Product.add(
+  '/../img/purchare/image-618.jpg',
+  `Комп'ютер ARTLINE Gaming by ASUS TUF v119 (TUFv119)`,
+  `Intel Core i9-13900KF (3.0 - 5.8 ГГц) / RAM 64 ГБ / SSD 2 ТБ (2 x 1 ТБ) / nVidia GeForce RTX 4070 Ti, 12 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / без ОС`,
+  [
+    { id: 1, text: 'Готовий до відправки' },
+    { id: 2, text: 'Топ продажів' },
+  ],
+  27000,
+)
+
+// ================================================================
+
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
 router.get('/', function (req, res) {
   // res.render генерує нам HTML сторінку
 
-  const list = User.getList()
-
   // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('index', {
+  res.render('purchase-index', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'index',
+    style: 'purchase-index',
+    title: 'Товари',
+    description: `Комп'ютери та ноутбуки/Комп'ютери, неттопи, моноблоки`,
 
     data: {
-      users: {
-        list,
-        isEmpty: list.length === 0,
-      },
+      title: 'Товари',
+      subtitle:
+        "Комп'ютери та ноутбуки/Комп'ютери, неттопи, моноблоки",
+
+      products: Product.getList(),
     },
   })
   // ↑↑ сюди вводимо JSON дані
-})
-
-// ================================================================
-
-class User {
-  static #list = []
-
-  constructor(email, login, password) {
-    this.email = email
-    this.login = login
-    this.password = password
-    this.id = new Date().getTime()
-  }
-
-  verifyPassword = (password) => this.password === password
-
-  static add = (user) => this.#list.push(user)
-
-  static getList = () => this.#list
-
-  static getById = (id) =>
-    this.#list.find((user) => user.id === id)
-
-  static deleteById = (id) => {
-    const index = this.#list.findIndex(
-      (user) => user.id === id,
-    )
-
-    if (index !== -1) {
-      this.#list.splice(index, 1)
-      return true
-    } else {
-      return false
-    }
-  }
-
-  static updateById = (id, data) => {
-    const user = this.getById(id)
-
-    if (user) {
-      this.update(user, data)
-      return true
-    } else {
-      return false
-    }
-  }
-
-  static update = (user, { email }) => {
-    if (email) {
-      user.email = email
-    }
-  }
-}
-
-// ================================================================
-
-class Product {
-  static #list = []
-
-  constructor(name, price, description) {
-    this.id = this.generateId()
-    this.createDate = new Date().toISOString()
-    this.name = name
-    this.price = price
-    this.description = description
-  }
-
-  generateId() {
-    // Генеруємо п'ятизначне випадкове число для id
-    const min = 10000
-    const max = 99999
-    return Math.floor(Math.random() * (max - min + 1) + min)
-  }
-
-  static getList = () => this.#list
-
-  static add = (product) => this.#list.push(product)
-
-  static getById = (id) =>
-    this.#list.find((product) => product.id === id)
-
-  static updateById = (id, data) => {
-    const product = this.getById(id)
-
-    if (product) {
-      this.update(product, data)
-      return true
-    } else {
-      return false
-    }
-  }
-
-  static update = (
-    product,
-    { name, price, description },
-  ) => {
-    if (name) {
-      product.name = name
-    }
-    if (price) {
-      product.price = price
-    }
-    if (description) {
-      product.description = description
-    }
-  }
-
-  static deleteById = (id) => {
-    const index = this.#list.findIndex(
-      (product) => product.id === Number(id),
-    )
-
-    if (index !== -1) {
-      this.#list.splice(index, 1)
-      return true
-    } else {
-      return false
-    }
-  }
-}
-
-// ================================================================
-
-router.post('/user-create', function (req, res) {
-  const { email, login, password } = req.body
-
-  const user = new User(email, login, password)
-
-  User.add(user)
-
-  console.log(User.getList())
-
-  res.render('success-info', {
-    style: 'success-info',
-
-    info: 'Користувач створений',
-  })
-})
-
-// ================================================================
-
-router.get('/user-delete', function (req, res) {
-  const { id } = req.query
-
-  User.deleteById(Number(id))
-
-  res.render('success-info', {
-    style: 'success-info',
-
-    info: 'Користувач видалений',
-  })
-})
-
-// ================================================================
-
-router.post('/user-update', function (req, res) {
-  const { email, password, id } = req.body
-
-  let result = false
-
-  const user = User.getById(Number(id))
-
-  if (user.verifyPassword(password)) {
-    User.update(user, { email })
-    result = true
-  }
-
-  res.render('success-info', {
-    style: 'success-info',
-
-    info: result
-      ? 'Email пошта оновлена'
-      : 'Сталася помилка',
-  })
-})
-
-// ================================================================
-
-router.get('/product-create', function (req, res) {
-  res.render('product-create', {
-    style: 'product-create',
-  })
-})
-
-// ================================================================
-
-router.post('/alert', function (req, res) {
-  const { name, price, description } = req.body
-
-  const product = new Product(name, price, description)
-
-  Product.add(product)
-
-  console.log(Product.getList())
-
-  let result = false
-
-  if (Product.getById(product.id)) {
-    result = true
-  } else {
-    result = false
-  }
-
-  // Перевірка на пусті поля перед додаванням товару
-  if (!name || !price || !description) {
-    res.render('alert', {
-      style: 'alert',
-      isError: true,
-      title: 'Сталася помилка',
-      info: 'Товар не був доданий: неправильні дані',
-    })
-    return // Припинити виконання функції, якщо поля не заповнені
-  }
-
-  res.render('alert', {
-    style: 'alert',
-    title: result
-      ? 'Успішне виконання дії'
-      : 'Сталася помилка',
-    info: result
-      ? 'Товар успішно був доданий'
-      : 'Товар не був доданий',
-  })
 })
 
 // ================================================================
@@ -256,21 +159,23 @@ router.post('/alert', function (req, res) {
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/product-list', function (req, res) {
+router.get('/purchase-product', function (req, res) {
   // res.render генерує нам HTML сторінку
-
-  const list = Product.getList()
+  const id = Number(req.query.id)
+  console.log('list:', Product.getRandomList(id))
+  console.log('product:', Product.getById(id))
 
   // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('product-list', {
+  res.render('purchase-product', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'product-list',
+    style: 'purchase-product',
+
+    title: 'Інші товари',
+    description: "Комп'ютери та ноутбуки",
 
     data: {
-      products: {
-        list,
-        isEmpty: list.length === 0,
-      },
+      list: Product.getRandomList(id),
+      product: Product.getById(id),
     },
   })
   // ↑↑ сюди вводимо JSON дані
@@ -278,82 +183,51 @@ router.get('/product-list', function (req, res) {
 
 // ================================================================
 
-router.get('/product-edit', function (req, res) {
-  const { id } = req.query
+// router.get Створює нам один ентпоїнт
 
-  const product = Product.getById(Number(id))
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.post('/purchase-create', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const id = Number(req.query.id)
+  // const amount = Number(req.body.amount)
 
-  if (!product) {
-    // Якщо товар з таким id не знайдено, відображаємо повідомлення про помилку
-    res.render('alert', {
-      style: 'alert',
-      isError: true,
-      title: 'Помилка',
-      info: 'Товар з таким ID не знайдено',
-    })
-  } else {
-    // Якщо товар знайдено, передаємо його дані у шаблон product-edit
-    res.render('product-edit', {
-      style: 'product-edit',
+  // console.log(id, amount)
 
-      data: {
-        name: product.name,
-        price: product.price,
-        id: product.id,
-        description: product.description,
-      },
-    })
-  }
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('purchase-product', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'purchase-product',
+
+    // title: 'Інші товари',
+    // description: "Комп'ютери та ноутбуки",
+
+    data: {
+      list: Product.getRandomList(id),
+      product: Product.getById(id),
+    },
+  })
+  // ↑↑ сюди вводимо JSON дані
 })
 
 // ================================================================
 
-router.post('/product-edit', function (req, res) {
-  const { id, name, price, description } = req.body
+// router.get Створює нам один ентпоїнт
 
-  const product = Product.updateById(Number(id), {
-    name,
-    price,
-    description,
-  })
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get('/alert', function (req, res) {
+  // res.render генерує нам HTML сторінку
 
-  if (product) {
-    // Якщо оновлення вдалося, відображаємо повідомлення про успіх
-    res.render('alert', {
-      style: 'alert',
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('alert', {
+    style: 'alert',
+
+    data: {
+      link: '/test',
       title: 'Успішне виконання дії',
       info: 'Товар успішно оновлено',
-    })
-  } else {
-    // Якщо оновлення не вдалося (наприклад, товару з таким id не існує),
-    // відображаємо повідомлення про помилку
-    res.render('alert', {
-      style: 'alert',
-      title: 'Помилка',
-      info: 'Не вдалося оновити товар',
-    })
-  }
-})
-
-// ================================================================
-
-router.get('/product-delete', function (req, res) {
-  const { id } = req.query
-
-  const isDeleted = Product.deleteById(Number(id))
-
-  if (isDeleted) {
-    // Якщо видалення успішне, перенаправте на сторінку зі списком товарів
-    res.redirect('/product-list')
-  } else {
-    // Якщо видалення не вдалося (наприклад, товару з таким id не існує),
-    // відображаємо повідомлення про помилку
-    res.render('alert', {
-      style: 'alert',
-      title: 'Помилка',
-      info: 'Не вдалося видалити товар',
-    })
-  }
+    },
+  })
+  // ↑↑ сюди вводимо JSON дані
 })
 
 // ================================================================

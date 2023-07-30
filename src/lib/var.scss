@@ -4,6 +4,7 @@ $colorMap: (
     primary: #005cd5,
     desription: #909090,
     warning: rgb(251, 0, 0),
+    success: #008000,
 );
 
 @function color ($key) {
@@ -11,6 +12,9 @@ $colorMap: (
 }
 
 $sizeMap: (
+    title: 40px,
+    subTitle: 32px,
+    titleProduct: 28px,
     textTitle: 20px,
     textSubtitle: 18px,
     text: 14px,

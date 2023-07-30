@@ -2,11 +2,11 @@
   <section>
     <div class='form'>
       <div class='form__content'>
-        <h1 class='{{#if isError}} form__title--error {{else}}form__title{{/if}}'>{{title}}</h1>
-        <p class='form__text'>{{info}}</p>
+        <h1 class='{{#if isError}} form__title--error {{else}}form__title{{/if}}'>{{data.title}}</h1>
+        <p class='form__text'>{{data.info}}</p>
       </div>
       <a
-        href='/product-list'
+        href='{{data.link}}'
         class='form__button'
       >Повернутися назад</a>
     </div>
