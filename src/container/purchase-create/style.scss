@@ -1,0 +1,72 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../component/heading/style.scss' as heading;
+@use '../../component/purchase-product/style.scss' as purchase;
+@use '../../component/divider/style.scss' as divider;
+@use '../../component/field/style.scss' as field;
+@use '../../component/button/style.scss' as button;
+
+.form__create {
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: s.space(5);
+        border: 1px solid s.color('light');
+        border-radius: s.space(1);
+        box-shadow: 4px 4px 8px #f0f0f0;
+        padding: s.space(6);
+        max-width: 1000px;
+
+        &__title {
+            font-size: s.size('title');
+            color: s.color('primary');
+            font-weight: 500;
+        }
+    }    
+}
+
+.cart {
+    display: grid;
+    gap: s.space(5);
+}
+
+.cart__item {
+    font-size: s.size('text');
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart__create {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: s.space(5);
+
+    .title {
+        font-size: s.size('titleProduct');
+    }
+
+    .cart__block{
+        display: flex;
+        justify-content: space-between;
+        gap: s.space(5);
+    }
+}
+
+.form__label--small {
+    font-size: s.size('text');
+    color: s.color('desription');
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(10);
+    padding: s.space(10);
+}
+
+.accent-text{
+    font-size: s.size('textTitle');
+}

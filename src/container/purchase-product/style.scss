@@ -4,6 +4,7 @@
 @use '../../component/purchase-product/style.scss' as purchase;
 @use '../../component/divider/style.scss' as divider;
 @use '../../component/field/style.scss' as field;
+@use '../../component/button/style.scss' as button;
 
 .main {
     display: flex;
@@ -48,17 +49,5 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-
-    &__button {
-        width: fit-content;
-        background-color: s.color('primary');
-        color: s.color('secondary');
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: s.space(4) s.space(10);
-        border-radius: s.space(2);
     }
 }

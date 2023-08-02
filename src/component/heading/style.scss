@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: column;
     gap: s.space(5);
-    margin-bottom: s.space(15);
 }
 .title {
     font-size: s.size('title');
@@ -13,6 +12,10 @@
 }
 .description {
     font-size: s.size('textSubtitle');
+    margin-bottom: s.space(15);
+}
+.subtitle{
+    font-size: s.size('titleProduct');
 }
 
 .heading_products {
@@ -23,8 +26,5 @@
         font-size: s.size('subTitle');
         color: #000;
         font-weight: bold;
-    }
-    .description {
-        font-size: s.size('textSubtitle');
     }
 }

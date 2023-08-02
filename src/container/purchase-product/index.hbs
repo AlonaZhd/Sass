@@ -10,20 +10,17 @@
       <img src='../img/purchare/image-616.jpg' alt='{{title}}'/>
     </div>
     <div class='product__info'>
-            <h2 class='product__info__title'>title {{title}}</h2>
-            {{> divider}}
+        <h2 class='product__info__title'>{{title}}</h2>
+        {{> divider}}
 
-            <p
-              class='product__info__description'
-            >description {{description}}</p>
-            {{> divider}}
+        <p
+          class='product__info__description'
+        >{{description}}</p>
+        {{> divider}}
 
-            {{> field label='Кількість товару' type='number' name='amount' value='1'}}
+        {{> field label='Кількість товару' type='number' name='amount' value='1'}}
 
-            <button
-              class='product__info__button'
-            >Купити зараз:
-              {{price}}$</button>
+        {{> button text='Купити зараз' price=price}}
     </div>
   </form>
   {{/with}}

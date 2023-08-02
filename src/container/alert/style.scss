@@ -1,5 +1,11 @@
 @use '../../lib/service.scss' as s;
 
+@use '../../component/heading/style.scss' as heading;
+@use '../../component/purchase-product/style.scss' as purchase;
+@use '../../component/divider/style.scss' as divider;
+@use '../../component/field/style.scss' as field;
+@use '../../component/button/style.scss' as button;
+
 .form {
     display: flex;
     justify-content: space-between;
@@ -29,15 +35,6 @@
 
     &__text {
         font-size: s.size('text');
-    }
-
-    &__button {
-        padding: s.space(2) s.space(8);
-        font-size: s.size('text');
-        color: s.color('secondary');
-        background-color: s.color('primary');
-        border-radius: s.space(1);
-        height: max-content;
     }
 }
 

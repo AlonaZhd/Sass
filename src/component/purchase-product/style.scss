@@ -40,15 +40,4 @@
             color:  s.color('primary');
         }
     }
-
-
-    &__button {
-        background-color: s.color('primary');
-        color: s.color('secondary');
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: s.space(4);
-        border-radius: s.space(2);
-    }
 }
