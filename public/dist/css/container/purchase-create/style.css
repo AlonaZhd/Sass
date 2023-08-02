@@ -106,6 +106,29 @@
   opacity: 0.7;
 }
 
+.purchase-item {
+  display: grid;
+  grid-template-columns: 2fr 4fr 3fr 3fr;
+  gap: 32px;
+}
+
+.purchase-item__block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.purchase-item__block .title {
+  font-size: 14px;
+  color: #808080;
+  font-weight: 400;
+  line-height: 150%;
+}
+.purchase-item__block .text {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
 .form__create .form {
   display: flex;
   flex-direction: column;

@@ -16,7 +16,7 @@ class Product {
     description,
     category,
     price,
-    ampunt = 0,
+    amount = 0,
   ) {
     this.id = ++Product.#count // Генеруємо унікальний id для товару
     this.img = img
@@ -24,7 +24,7 @@ class Product {
     this.description = description
     this.category = category
     this.price = price
-    this.amount = ampunt
+    this.amount = amount
   }
 
   static add = (...data) => {
@@ -145,12 +145,16 @@ class Purchase {
     return Purchase.#bonusAccount.get(email) || 0
   }
 
+  static calcBonusAmount = (value) => {
+    return value * Purchase.#BONUS_FACTOR
+  }
+
   static updateBonusBalance = (
     email,
     price,
     bonusUse = 0,
   ) => {
-    const amount = price * Purchase.#BONUS_FACTOR
+    const amount = this.calcBonusAmount(price)
 
     const currentBalance = Purchase.getBonusBalance(email)
 
@@ -191,11 +195,21 @@ class Purchase {
     const newPurchase = new Purchase(...arg)
 
     this.#list.push(newPurchase)
+
+    // Оновлення об'єкту product після успішної покупки
+    newPurchase.product.amount -= newPurchase.amount
+
     return newPurchase
   }
 
   static getList = () => {
-    return this.#list.reverse()
+    return this.#list
+      .reverse()
+      .map(({ id, product, totalPrice }) => ({
+        id,
+        title: product.title,
+        totalPrice,
+      }))
   }
 
   static getById = (id) => {
@@ -341,6 +355,7 @@ router.post('/purchase-create', function (req, res) {
 
   const productPrice = product.price * amount
   const totalPrice = productPrice + Purchase.DELIVERY_PRICE
+  const bonus = Purchase.calcBonusAmount(totalPrice)
 
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('purchase-create', {
@@ -364,6 +379,8 @@ router.post('/purchase-create', function (req, res) {
       ],
       totalPrice,
       productPrice,
+      amount,
+      bonus,
       deliveryPrice: Purchase.DELIVERY_PRICE,
     },
   })
@@ -378,7 +395,7 @@ router.post('/purchase-create', function (req, res) {
 router.post('/purchase-submit', function (req, res) {
   // res.render генерує нам HTML сторінку
   // console.log(req.query)
-  console.log(req.body)
+  // console.log(req.body)
   const id = Number(req.query.id)
 
   let {
@@ -391,6 +408,7 @@ router.post('/purchase-submit', function (req, res) {
     lastname,
     email,
     phone,
+    comment,
 
     promocode,
     bonus,
@@ -497,6 +515,8 @@ router.post('/purchase-submit', function (req, res) {
       phone,
 
       promocode,
+      bonus,
+      comment,
     },
     product,
   )
@@ -511,6 +531,35 @@ router.post('/purchase-submit', function (req, res) {
       link: '/purchase-list',
       title: 'Успішне виконання дії',
       info: 'Замовлення створене',
+    },
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get('/purchase-list', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  // const bonus = res.bonus
+  // console.log(bonus)
+
+  const list = Purchase.getList()
+  console.log('purchase-list:', list)
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('purchase-list', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'purchase-list',
+    title: 'Мої замовлення',
+
+    data: {
+      purchases: {
+        list,
+      },
+      bonus, // Отримати bonusAmount з параметрів URL
     },
   })
   // ↑↑ сюди вводимо JSON дані

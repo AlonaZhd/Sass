@@ -7,16 +7,15 @@
 @use '../../component/button/style.scss' as button;
 @use '../../component/purchase-item/style.scss' as item;
 
+.purchase-list {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(5);
+}
+
 .main {
     display: flex;
     flex-direction: column;
     gap: s.space(10);
     padding: s.space(10);
-    max-width: 1200px;
-}
-
-.product-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: s.space(15) s.space(5);
 }
