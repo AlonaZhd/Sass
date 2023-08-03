@@ -607,6 +607,100 @@ router.get('/purchase-info', function (req, res) {
 
 // ================================================================
 
+router.get('/purchase-edit', function (req, res) {
+  const id = Number(req.query.id)
+
+  const purchase = Purchase.getById(id)
+
+  if (!purchase) {
+    // Якщо товар з таким id не знайдено, відображаємо повідомлення про помилку
+    res.render('alert', {
+      style: 'alert',
+      isError: true,
+      title: 'Помилка',
+      info: 'Замовлення з таким ID не знайдено',
+    })
+  } else {
+    // Якщо товар знайдено, передаємо його дані у шаблон product-edit
+    res.render('purchase-edit', {
+      style: 'purchase-edit',
+      title: 'Зміна данних замовлення',
+
+      data: {
+        id: purchase.id,
+        firstname: purchase.firstname,
+        lastname: purchase.lastname,
+        phone: purchase.phone,
+        email: purchase.email,
+        delivery: purchase.delivery,
+      },
+    })
+  }
+})
+
+// ================================================================
+
+router.post('/purchase-edit', function (req, res) {
+  const id = Number(req.query.id)
+  let { firstname, lastname, phone, email, delivery } =
+    req.body
+
+  const purchase = Purchase.getById(id)
+
+  console.log(purchase)
+
+  if (purchase) {
+    const newPurchase = Purchase.updateById(id, {
+      firstname,
+      lastname,
+      phone,
+      email,
+      delivery,
+    })
+
+    console.log(newPurchase)
+
+    // Якщо оновлення вдалося, відображаємо повідомлення про успіх
+    if (newPurchase) {
+      res.render('alert', {
+        style: 'alert',
+
+        data: {
+          link: '/purchase-list',
+          title: 'Успішне виконання дії',
+          info: 'Товар успішно оновлено',
+        },
+      })
+    } else {
+      // Якщо оновлення не вдалося (наприклад, товару з таким id не існує),
+      // відображаємо повідомлення про помилку
+      res.render('alert', {
+        style: 'alert',
+
+        data: {
+          link: '/purchase-list',
+          title: 'Помилка',
+          info: 'Не вдалося оновити товар',
+        },
+      })
+    }
+  } else {
+    // Якщо оновлення не вдалося (наприклад, товару з таким id не існує),
+    // відображаємо повідомлення про помилку
+    res.render('alert', {
+      style: 'alert',
+
+      data: {
+        link: '/purchase-list',
+        title: 'Помилка',
+        info: 'Не вдалося оновити товар',
+      },
+    })
+  }
+})
+
+// ================================================================
+
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки

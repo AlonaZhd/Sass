@@ -1,6 +1,6 @@
 <main class='main'>
   <section class="purchase-info">
-      <form method="POST" action="/purchase-update?id={{id}}" class='form'>
+      <div class='form'>
           {{> heading}}
 
           {{#with data}}
@@ -64,12 +64,11 @@
                 </div>
               </div>
               {{> divider}}
-
-          {{/with}}
           
-
-        {{> button text="Змінити дані"}}
-
-      </form>
+          <a href='/purchase-edit?id={{id}}'>
+            {{> button text="Змінити дані"}}
+          </a>
+        {{/with}}
+      </div>
   </section>
 </main>

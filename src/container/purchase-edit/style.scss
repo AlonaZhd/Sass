@@ -1,0 +1,67 @@
+@use '../../lib/service.scss' as s;
+
+@use '../../component/heading/style.scss' as heading;
+@use '../../component/purchase-product/style.scss' as purchase;
+@use '../../component/divider/style.scss' as divider;
+@use '../../component/field/style.scss' as field;
+@use '../../component/button/style.scss' as button;
+@use '../../component/purchase-item/style.scss' as item;
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(10);
+    padding: s.space(10);
+}
+
+.purchase-edit {
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: s.space(5);
+        border: 1px solid s.color('light');
+        border-radius: s.space(1);
+        box-shadow: 4px 4px 8px #f0f0f0;
+        padding: s.space(6);
+        max-width: 1000px;
+
+        &__title {
+            font-size: s.size('title');
+            color: s.color('primary');
+            font-weight: 500;
+        }
+    }
+
+    .purchase-item{
+        display: flex;
+        justify-content: space-between;
+        gap: s.space(3);
+
+        .title {
+            font-size: s.size('text');
+            color: s.color('dark');
+            font-weight: 400;
+            line-height: 150%;
+        }
+    }
+    
+    .purchase-item__block {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+
+        .text {
+            font-size: s.size('textSubtitle');
+            font-weight: 400;
+            line-height: 150%;
+        }
+    }    
+}
+
+.cart__block{
+    display: flex;
+    justify-content: space-between;
+    gap: s.space(5);
+}
