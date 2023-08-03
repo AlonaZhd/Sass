@@ -176,6 +176,7 @@ class Purchase {
 
     this.phone = data.phone
     this.email = data.email
+    this.delivery = data.delivery
 
     this.comment = data.comment || null
 
@@ -203,13 +204,12 @@ class Purchase {
   }
 
   static getList = () => {
-    return this.#list
-      .reverse()
-      .map(({ id, product, totalPrice }) => ({
-        id,
-        title: product.title,
-        totalPrice,
-      }))
+    return Purchase.#list.reverse().map((purchase) => ({
+      id: purchase.id,
+      product: purchase.product.title,
+      totalPrice: purchase.totalPrice,
+      bonus: Purchase.calcBonusAmount(purchase.totalPrice),
+    }))
   }
 
   static getById = (id) => {
@@ -225,6 +225,7 @@ class Purchase {
       if (data.lastname) purchase.lastname = data.lastname
       if (data.phone) purchase.phone = data.phone
       if (data.email) purchase.email = data.email
+      if (data.delivery) purchase.delivery = data.delivery
 
       return true
     } else {
@@ -409,6 +410,7 @@ router.post('/purchase-submit', function (req, res) {
     email,
     phone,
     comment,
+    delivery,
 
     promocode,
     bonus,
@@ -464,7 +466,7 @@ router.post('/purchase-submit', function (req, res) {
     })
   }
 
-  if ((!firstname, !lastname, !email, !phone)) {
+  if ((!firstname, !lastname, !email, !phone, !delivery)) {
     return res.render('alert', {
       style: 'alert',
 
@@ -517,6 +519,7 @@ router.post('/purchase-submit', function (req, res) {
       promocode,
       bonus,
       comment,
+      delivery,
     },
     product,
   )
@@ -543,7 +546,6 @@ router.post('/purchase-submit', function (req, res) {
 // ↙️ тут вводимо шлях (PATH) до сторінки
 router.get('/purchase-list', function (req, res) {
   // res.render генерує нам HTML сторінку
-  // const bonus = res.bonus
   // console.log(bonus)
 
   const list = Purchase.getList()
@@ -559,7 +561,45 @@ router.get('/purchase-list', function (req, res) {
       purchases: {
         list,
       },
-      bonus, // Отримати bonusAmount з параметрів URL
+      // bonus, // Отримати bonusAmount з параметрів URL
+    },
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get('/purchase-info', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const id = Number(req.query.id)
+  const purchase = Purchase.getById(id)
+  const bonus = Purchase.calcBonusAmount(
+    purchase.totalPrice,
+  )
+
+  console.log('purchase:', purchase, bonus)
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('purchase-info', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'purchase-info',
+    title: 'Інформація про замовлення',
+
+    data: {
+      id: purchase.id,
+      firstname: purchase.firstname,
+      lastname: purchase.lastname,
+      phone: purchase.phone,
+      email: purchase.email,
+      delivery: purchase.delivery,
+      product: purchase.product.title,
+      productPrice: purchase.productPrice,
+      deliveryPrice: purchase.deliveryPrice,
+      totalPrice: purchase.totalPrice,
+      bonus: bonus,
     },
   })
   // ↑↑ сюди вводимо JSON дані

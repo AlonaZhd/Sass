@@ -26,11 +26,14 @@
               {{> field label='Мобільний телефон' name='phone'}}
               {{> field label="Електронна пошта" name='email'}}
             </div>
+            {{> field label='Адреса доставки' name='delivery'}}
+          
             {{> field label='Коментар' name='comment'}}
               <small
                 class='form__label--small'
               >Коментар буде передано кур’єру</small>
-              {{> divider}}
+            {{> divider}}
+
             <div class="cart__block">
               {{> field label='Списати бонуси' name='bonus'}}
               {{> field label="Промо-код" name='promocode'}}
