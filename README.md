@@ -1,6 +1,5 @@
-# sass-test
+# 3-purchase
 
-3-purchase
 - showing the list of products, 
 - ordering products, 
 - making an order with delivery, bonuses and promo codes, 
