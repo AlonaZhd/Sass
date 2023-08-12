@@ -1,10 +1,11 @@
-@use '../../lib/service.scss' as s;
+@use '../../style' as s;
 
 .form {
     display: flex;
     flex-direction: column;
     gap: s.space(8);
     padding: s.space(10);
+    max-width: 600px;
 
     &__title {
         font-size: s.size('textTitle');
@@ -20,7 +21,6 @@
         border-radius: s.space(1);
         box-shadow: 4px 4px 8px #f0f0f0;
         padding: s.space(4);
-        width: fit-content;
     }
 
     &__row {
@@ -33,6 +33,7 @@
         display: flex;
         flex-direction: column;
         gap: s.space(1);
+        width: 100%;
     }
 
     &__label {
@@ -59,15 +60,8 @@
         background-color: s.color('primary');
         color: s.color('secondary');
         border-radius: s.space(1);
-        width: 50%;
-        text-align: center;
-
-        &-warning {
-            @extend .form__button;
-            background-color: s.color('warning');
-        }
+        width: 100%;
     }
-
 }
 
 .main {

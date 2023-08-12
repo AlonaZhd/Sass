@@ -1,22 +1,5 @@
-@use '../../lib/service.scss' as s;
+@use '../../style' as s;
 
-.product-list {
-    display: flex;
-    flex-direction: column;
-    gap: s.space(8);
-}
-.title {
-    font-size: s.size('textSubtitle');
-    color: s.color('primary');
-    font-weight: bold;
-}
-
-
-.product-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: s.space(3) s.space(8);
-}
 .product__card {
     display: flex;
     flex-direction: column;
@@ -59,12 +42,4 @@
     &__link {
         color: s.color('primary');
     }
-}
-
-
-.main {
-    display: flex;
-    flex-direction: column;
-    gap: s.space(10);
-    padding: s.space(10);
 }
