@@ -1,0 +1,61 @@
+.form__create .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  box-shadow: 4px 4px 8px #f0f0f0;
+  padding: 24px;
+  max-width: 1000px;
+}
+.form__create .form__title {
+  font-size: 40px;
+  color: #005cd5;
+  font-weight: 500;
+}
+
+.cart {
+  display: grid;
+  gap: 20px;
+}
+
+.cart__item {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart__create {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.cart__create .title {
+  font-size: 28px;
+}
+.cart__create .cart__block {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.form__label--small {
+  font-size: 14px;
+  color: #909090;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+}
+
+.accent-text {
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=index.css.map */

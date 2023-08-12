@@ -30,15 +30,6 @@
     &__text {
         font-size: s.size('text');
     }
-
-    &__button {
-        padding: s.space(2) s.space(8);
-        font-size: s.size('text');
-        color: s.color('secondary');
-        background-color: s.color('primary');
-        border-radius: s.space(1);
-        height: max-content;
-    }
 }
 
 .main {

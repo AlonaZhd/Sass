@@ -1,0 +1,43 @@
+@use '../../style' as s;
+
+.product__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: s.space(4);
+    padding: s.space(4);
+    border: 1px solid s.color('light');
+    border-radius: s.space(2);
+    box-shadow: 4px 4px 8px #f0f0f0;
+    max-width: 320px;
+    min-width: 250px;
+
+    &__title {
+        font-size: s.size('textTitle');
+        font-weight: bold;
+        line-height: 120%;
+    }
+
+    &__description {
+        font-size: s.size('text');
+        line-height: 145%;
+    }
+
+    &__category {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: s.space(2) s.space(4);
+        border-radius: s.space(20);
+
+        &--1 {
+            border: 1px solid s.color('success');
+            color:  s.color('success');
+        }
+
+        &--2 {
+            border: 1px solid s.color('primary');
+            color:  s.color('primary');
+        }
+    }
+}

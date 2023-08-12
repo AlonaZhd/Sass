@@ -1,0 +1,28 @@
+@use '../../style' as s;
+
+
+.purchase-item {
+    display: grid;
+    grid-template-columns: 2fr 4fr 3fr 3fr;
+    gap: s.space(8);
+}
+
+.purchase-item__block {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(3);
+
+    .title {
+        font-size: s.size('text');
+        color: s.color('dark');
+        font-weight: 400;
+        line-height: 150%;
+    }
+
+    .text {
+        font-size: s.size('textSubtitle');
+        font-weight: 400;
+        line-height: 150%;
+    }
+}
+

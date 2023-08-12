@@ -22,8 +22,6 @@
 
   {{!-- Підключаємо файл стилів layout --}}
   <link href='dist/css/layout/default/index.css' rel='stylesheet' />
-  {{!-- Підключаємо файл скриптів layout --}}
-  <script src="dist/js/layout/default/index.js"></script>
 
   {{!-- Підключаємо файл стилів container --}}
   <link href='dist/css/container/{{style}}/index.css' rel='stylesheet' />
@@ -32,8 +30,6 @@
   {{#each component}}
   {{!-- Підключаємо файл стилів component --}}
   <link href='dist/css/component/{{this}}/index.css' rel='stylesheet' />
-  {{!-- Підключаємо файл скриптів component --}}
-  <script src="dist/js/component/{{this}}/index.js"></script>
   {{/each}}
 
 </head>
@@ -44,7 +40,14 @@
   {{{body}}}
 
 </body>
+{{!-- Підключаємо файл скриптів layout --}}
+<script src="dist/js/layout/default/index.js"></script>
 {{!-- Підключаємо файл скриптів container --}}
 <script src="dist/js/container/{{style}}/index.js"></script>
+
+{{#each component}}
+{{!-- Підключаємо файл скриптів component --}}
+<script src="dist/js/component/{{this}}/index.js"></script>
+{{/each}}
 
 </html>

@@ -1,0 +1,15 @@
+@use '../../style' as s;
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(10);
+    padding: s.space(10);
+    max-width: 1200px;
+}
+
+.product-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: s.space(15) s.space(5);
+}
