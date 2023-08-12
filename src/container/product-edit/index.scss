@@ -1,0 +1,83 @@
+@use '../../style' as s;
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(8);
+    padding: s.space(10);
+
+    &__title {
+        font-size: s.size('textTitle');
+        font-weight: bold;
+        color: s.color('primary');
+        margin-bottom: s.space(3);
+    }
+
+    &__content {
+        display: grid;
+        gap: s.space(6);
+        border: 1px solid s.color('light');
+        border-radius: s.space(1);
+        box-shadow: 4px 4px 8px #f0f0f0;
+        padding: s.space(4);
+        width: fit-content;
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        gap: s.space(2);
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: s.space(1);
+    }
+
+    &__label {
+        font-size: s.size('text');
+    }
+
+    &__input {
+        border: 1px solid s.color('light');
+        padding: s.space(2);
+    }
+
+    .input--big {
+        height: s.space(14);
+    }
+
+    &__label--small {
+        font-size: s.size('textSmall');
+        color: s.color('desription');
+    }
+
+    &__button {
+        @extend .form__input;
+        font-size: s.size('text');
+        background-color: s.color('primary');
+        color: s.color('secondary');
+        border-radius: s.space(1);
+        width: 50%;
+        text-align: center;
+
+        &-warning {
+            @extend .form__button;
+            background-color: s.color('warning');
+        }
+    }
+
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(10);
+}
+
+// .user-list {
+//     li {
+//         padding: s.space(1) s.space(2) s.space(1) 0;
+//     }
+// }

@@ -1,0 +1,55 @@
+@use '../../style' as s;
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(8);
+    padding: s.space(4);
+    max-width: 600px;
+
+    &__title {
+        font-size: s.size('textTitle');
+        font-weight: bold;
+        padding-bottom: s.space(1);
+        border-bottom: 1px solid s.color('light');
+    }
+
+    &__content {
+        display: grid;
+        gap: s.space(6);
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: s.space(1);
+    }
+
+    &__label {
+        font-size: s.size('text');
+    }
+
+    &__input {
+        border: 1px solid s.color('light');
+        padding: s.space(2);
+    }
+
+    &__button {
+        @extend .form__input;
+        background-color: s.color('secondary');
+        border-radius: 10px;
+        width: 220px;
+    }
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(10);
+}
+
+.user-list {
+    li {
+        padding: s.space(1) s.space(2) s.space(1) 0;
+    }
+}

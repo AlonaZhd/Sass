@@ -1,0 +1,53 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+}
+
+.purchase-edit .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  box-shadow: 4px 4px 8px #f0f0f0;
+  padding: 24px;
+  max-width: 1000px;
+}
+.purchase-edit .form__title {
+  font-size: 40px;
+  color: #005cd5;
+  font-weight: 500;
+}
+.purchase-edit .purchase-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.purchase-edit .purchase-item .title {
+  font-size: 14px;
+  color: #808080;
+  font-weight: 400;
+  line-height: 150%;
+}
+.purchase-edit .purchase-item__block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0;
+}
+.purchase-edit .purchase-item__block .text {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+}
+
+.cart__block {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/*# sourceMappingURL=index.css.map */

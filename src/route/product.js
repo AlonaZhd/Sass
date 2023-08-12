@@ -3,72 +3,7 @@ const express = require('express')
 // Cтворюємо роутер - місце, куди ми підключаємо ендпоїнти
 const router = express.Router()
 
-// ================================================================
-
-class Product {
-  static #list = []
-
-  constructor(name, price, description) {
-    this.id = this.generateId()
-    this.createDate = new Date().toISOString()
-    this.name = name
-    this.price = price
-    this.description = description
-  }
-
-  generateId() {
-    // Генеруємо п'ятизначне випадкове число для id
-    const min = 10000
-    const max = 99999
-    return Math.floor(Math.random() * (max - min + 1) + min)
-  }
-
-  static getList = () => this.#list
-
-  static add = (product) => this.#list.push(product)
-
-  static getById = (id) =>
-    this.#list.find((product) => product.id === id)
-
-  static updateById = (id, data) => {
-    const product = this.getById(id)
-
-    if (product) {
-      this.update(product, data)
-      return true
-    } else {
-      return false
-    }
-  }
-
-  static update = (
-    product,
-    { name, price, description },
-  ) => {
-    if (name) {
-      product.name = name
-    }
-    if (price) {
-      product.price = price
-    }
-    if (description) {
-      product.description = description
-    }
-  }
-
-  static deleteById = (id) => {
-    const index = this.#list.findIndex(
-      (product) => product.id === Number(id),
-    )
-
-    if (index !== -1) {
-      this.#list.splice(index, 1)
-      return true
-    } else {
-      return false
-    }
-  }
-}
+const Product = require('../class/product')
 
 // ================================================================
 
@@ -110,17 +45,12 @@ router.post('/alert', function (req, res) {
 
   res.render('alert', {
     style: 'alert',
-    isError: true,
-
-    data: {
-      link: '/product-list',
-      title: result
-        ? 'Успішне виконання дії'
-        : 'Сталася помилка',
-      info: result
-        ? 'Товар успішно був доданий'
-        : 'Товар не був доданий',
-    },
+    title: result
+      ? 'Успішне виконання дії'
+      : 'Сталася помилка',
+    info: result
+      ? 'Товар успішно був доданий'
+      : 'Товар не був доданий',
   })
 })
 
@@ -138,6 +68,9 @@ router.get('/product-list', function (req, res) {
   res.render('product-list', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
     style: 'product-list',
+
+    // вказуємо назву компонентів
+    component: ['product-card'],
 
     data: {
       products: {
@@ -194,24 +127,16 @@ router.post('/product-edit', function (req, res) {
     // Якщо оновлення вдалося, відображаємо повідомлення про успіх
     res.render('alert', {
       style: 'alert',
-
-      data: {
-        link: '/product-list',
-        title: 'Успішне виконання дії',
-        info: 'Товар успішно оновлено',
-      },
+      title: 'Успішне виконання дії',
+      info: 'Товар успішно оновлено',
     })
   } else {
     // Якщо оновлення не вдалося (наприклад, товару з таким id не існує),
     // відображаємо повідомлення про помилку
     res.render('alert', {
       style: 'alert',
-
-      data: {
-        link: '/product-list',
-        title: 'Помилка',
-        info: 'Не вдалося оновити товар',
-      },
+      title: 'Помилка',
+      info: 'Не вдалося оновити товар',
     })
   }
 })
@@ -231,12 +156,8 @@ router.get('/product-delete', function (req, res) {
     // відображаємо повідомлення про помилку
     res.render('alert', {
       style: 'alert',
-
-      data: {
-        link: '/product-list',
-        title: 'Помилка',
-        info: 'Не вдалося оновити товар',
-      },
+      title: 'Помилка',
+      info: 'Не вдалося видалити товар',
     })
   }
 })

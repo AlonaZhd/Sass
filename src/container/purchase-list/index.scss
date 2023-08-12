@@ -1,0 +1,14 @@
+@use '../../style' as s;
+
+.purchase-list {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(5);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(10);
+    padding: s.space(10);
+}

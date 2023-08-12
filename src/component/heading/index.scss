@@ -1,0 +1,30 @@
+@use '../../style' as s;
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    gap: s.space(5);
+}
+.title {
+    font-size: s.size('title');
+    color: s.color('primary');
+    font-weight: bold;
+}
+.description {
+    font-size: s.size('textSubtitle');
+    margin-bottom: s.space(15);
+}
+.subtitle{
+    font-size: s.size('titleProduct');
+}
+
+.heading_products {
+    .heading {
+        align-items: center;
+    }
+    .title {
+        font-size: s.size('subTitle');
+        color: #000;
+        font-weight: bold;
+    }
+}

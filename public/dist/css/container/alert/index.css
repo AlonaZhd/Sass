@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  box-shadow: 4px 4px 8px #f0f0f0;
+  padding: 16px;
+  max-width: 600px;
+}
+.form__content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form__title {
+  font-size: 18px;
+  color: #005cd5;
+  font-weight: bold;
+}
+.form__title--error {
+  color: rgb(251, 0, 0);
+}
+.form__text {
+  font-size: 14px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+}
+
+/*# sourceMappingURL=index.css.map */
